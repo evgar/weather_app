@@ -1,0 +1,1 @@
+export const UNDO_DELETE_TIMEOUT = 3000;

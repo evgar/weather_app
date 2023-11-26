@@ -1,3 +1,21 @@
+# Weather App
+
+## App description:
+
+1. View the weather forecast for a chosen city, including:
+    - Current temperature
+    - Weather description
+    - Min and max temperatures for the day
+    - Wind speed
+
+2. Access the history of searched cities.
+
+3. Click on a history item to fetch weather data for that city.
+
+4. Remove a history search item.
+
+5. Undo a removal within 3 seconds.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
