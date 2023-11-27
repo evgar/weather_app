@@ -1,0 +1,18 @@
+.btn-group {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.delete-btn,
+.undo-btn {
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 10%;
+    min-width: 50px;
+}
+
+.cities-list-item {
+    cursor: pointer;
+}

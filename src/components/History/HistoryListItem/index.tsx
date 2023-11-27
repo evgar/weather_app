@@ -1,10 +1,9 @@
 import React from "react";
 
+import "./index.css";
+import { CityData } from "../../../interfaces/common";
+
 interface HistoryListItemProps {
-  name: string;
-  country: string;
-  lat: number;
-  lon: number;
   onCityClick: (index: number, lat: number, lon: number) => void;
   onDeleteClick: (index: number) => void;
   onUndoClick: () => void;
@@ -12,7 +11,7 @@ interface HistoryListItemProps {
   itemIndex: number;
 }
 
-export const HistoryListItem: React.FC<HistoryListItemProps> = ({
+export const HistoryListItem: React.FC<CityData & HistoryListItemProps> = ({
   name,
   country,
   lat,
@@ -23,7 +22,7 @@ export const HistoryListItem: React.FC<HistoryListItemProps> = ({
   undoIndex,
   itemIndex,
 }) => (
-  <li className="suggested-cities-list-item">
+  <li className="cities-list-item">
     <p onClick={() => onCityClick(itemIndex, lat, lon)}>
       {name}, {country}
     </p>

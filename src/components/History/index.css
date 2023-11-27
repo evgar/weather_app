@@ -1,0 +1,16 @@
+.delete-btn {
+    background-color: #e74c3c;
+    margin-right: 10px;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+.undo-btn {
+    background-color: #6389ce;
+}
+
+.undo-btn:hover {
+    background-color: #3a6bc9;
+}

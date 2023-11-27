@@ -1,4 +1,2 @@
-export enum openWeatherAPI {
-  key = "6ccdf83e806efbb45c7936a4c3a4d966",
-  suggestionsLimit = 5,
-}
+export const OPEN_WEATHER_API_KEY = "6ccdf83e806efbb45c7936a4c3a4d966";
+export const OPEN_WEATHER_API_SUGGESTIONS_LIMIT = 5;

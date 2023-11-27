@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import { openWeatherAPI } from "./enums/apiKeys";
+
+import { History } from "./components/History";
+import { Search } from "./components/Search";
+import { Widget } from "./components/Widget";
+
 import { UNDO_DELETE_TIMEOUT } from "./consts/timeouts";
 import {
   OPEN_WEATHER_MAP_API_URL,
   OPEN_WEATHER_SUGGESTED_CITIES_API_URL,
 } from "./consts/apiUrls";
-import { History } from "../src/components/History";
-import { Search } from "../src/components/Search";
-import { Widget } from "../src/components/Widget";
+import {
+  OPEN_WEATHER_API_KEY,
+  OPEN_WEATHER_API_SUGGESTIONS_LIMIT,
+} from "./enums/apiKeys";
+
 import { CityData, CityDataResponse, SuggestedCity } from "./interfaces/common";
+
+import "./App.css";
+import handleApiRequest from "./utils/handleAPIRequest";
 
 const App: React.FC = () => {
   const [search, setSearch] = useState<string>("");
@@ -36,39 +44,6 @@ const App: React.FC = () => {
 
     return () => clearTimeout(undoTimerId);
   }, [deletionIndexInPending]);
-
-  const fetchData = async (url: string) => {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Error! status: ${response.status}`);
-      }
-      return await response.json();
-    } catch (err) {
-      if (err instanceof Error) {
-        throw new Error(`Error! status: ${err.message}`);
-      }
-    }
-  };
-
-  const handleApiRequest = async (
-    url: string,
-    onSuccess: (
-      data: SuggestedCity[] | CityDataResponse,
-      index?: number
-    ) => void,
-    index?: number
-  ) => {
-    try {
-      const result = await fetchData(url);
-      console.log({ result });
-      onSuccess(result, index);
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error(error.message);
-      }
-    }
-  };
 
   const handleCityData = (
     data: SuggestedCity[] | CityDataResponse,
@@ -115,7 +90,7 @@ const App: React.FC = () => {
     setSearch("");
     setSuggestedCities([]);
 
-    const url = `${OPEN_WEATHER_MAP_API_URL}?lat=${lat}&lon=${lon}&units=metric&appid=${openWeatherAPI.key}`;
+    const url = `${OPEN_WEATHER_MAP_API_URL}?lat=${lat}&lon=${lon}&units=metric&appid=${OPEN_WEATHER_API_KEY}`;
 
     await handleApiRequest(url, handleCityData);
   };
@@ -125,7 +100,7 @@ const App: React.FC = () => {
     lat: number,
     lon: number
   ) => {
-    const url = `${OPEN_WEATHER_MAP_API_URL}?lat=${lat}&lon=${lon}&units=metric&appid=${openWeatherAPI.key}`;
+    const url = `${OPEN_WEATHER_MAP_API_URL}?lat=${lat}&lon=${lon}&units=metric&appid=${OPEN_WEATHER_API_KEY}`;
 
     await handleApiRequest(url, handleCityData, index);
   };
@@ -149,7 +124,7 @@ const App: React.FC = () => {
 
     setIsSuggestedCitiesLoading(true);
 
-    const url = `${OPEN_WEATHER_SUGGESTED_CITIES_API_URL}?q=${search}&limit=${openWeatherAPI.suggestionsLimit}&appid=${openWeatherAPI.key}`;
+    const url = `${OPEN_WEATHER_SUGGESTED_CITIES_API_URL}?q=${search}&limit=${OPEN_WEATHER_API_SUGGESTIONS_LIMIT}&appid=${OPEN_WEATHER_API_KEY}`;
 
     await handleApiRequest(url, handleSetSuggestedCity);
 

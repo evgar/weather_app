@@ -1,5 +1,7 @@
 import React from "react";
+
 import { CityData } from "../../interfaces/common";
+import "./index.css";
 
 interface WidgetProps {
   city: CityData;

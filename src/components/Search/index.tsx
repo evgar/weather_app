@@ -1,6 +1,8 @@
 import React from "react";
 import { SuggestedCity } from "../../interfaces/common";
 
+import "./index.css";
+
 interface SearchProps {
   onSuggestedCityClick: (coordinates: { lat: number; lon: number }) => void;
   search: string;
@@ -34,13 +36,13 @@ export const Search: React.FC<SearchProps> = ({
         Search
       </button>
     </div>
-    <ul className="suggested-cities-list">
+    <ul className="cities-list">
       {suggestedCities.map(
         ({ name, country, lat, lon, id }: SuggestedCity, i) => (
           <li
             key={`${i}${lat}${lon}`}
             onClick={() => onSuggestedCityClick({ lat, lon })}
-            className="suggested-city"
+            className="city"
           >{`${name} ${country}`}</li>
         )
       )}
